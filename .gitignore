@@ -1,5 +1,5 @@
 *~
 *.swp
 *.swo
-.exe
+*.exe
 build\
