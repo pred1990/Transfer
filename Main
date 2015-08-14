@@ -1,2 +1,9 @@
 #pragma once
+
 #include <iostream>
+#include <string>
+
+struct Adress
+{
+std::string IpAdress;
+};
