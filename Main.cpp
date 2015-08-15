@@ -31,8 +31,6 @@ Transfer::TransferRequest Transfer::getTransferRequest(char** input, size_t leng
 
 		Parameter parameter = convertToParameter(inputString);
 
-		std::cout << parameter.type << std::endl;
-
 		switch(parameter.type)
 		{
 			case IPADRESS :
