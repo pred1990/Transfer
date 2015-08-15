@@ -1,9 +1,23 @@
 #pragma once
 
 #include <iostream>
+#include <sstream>
 #include <string>
 
-struct Adress
+
+
+namespace Transfer
 {
-std::string IpAdress;
-};
+	struct TransferRequest
+	{
+		std::string ipAdress;
+		std::string file;
+	};
+
+	TransferRequest getTransferRequest(std::istream* input);
+	TransferRequest getTransferRequest(char** input, size_t length);
+
+	bool isEmpty(Transfer::TransferRequest request);
+}
+
+
