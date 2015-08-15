@@ -3,21 +3,35 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 
 
 namespace Transfer
 {
+	const std::string IpAdress = "IPADRESS";
+	const std::string FileName= "FILENAME";
+
+	enum Type {IPADRESS, FILENAME, NONE};
+
 	struct TransferRequest
 	{
 		std::string ipAdress;
-		std::string file;
+		std::string fileName;
 	};
 
-	TransferRequest getTransferRequest(std::istream* input);
+	struct Parameter
+	{
+		Type type;
+		std::string value;
+	};
+
+	TransferRequest getTransferRequest(std::istream* input, std::ostream* output);
 	TransferRequest getTransferRequest(char** input, size_t length);
 
 	bool isEmpty(Transfer::TransferRequest request);
+	Parameter convertToParameter(std::string input);
+	
 }
 
 

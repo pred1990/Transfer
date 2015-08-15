@@ -6,12 +6,10 @@ int main(int length, char** argv)
 
 	if(Transfer::isEmpty(request))
 	{
-		request = Transfer::getTransferRequest(&std::cin);
+		request = Transfer::getTransferRequest(&std::cin, &std::cout);
 	}
 
-	std::cout << "This is a Simple Test please enter a number and the porgramm will exit" << std::endl;
-	int a = 0;
-	std::cin >> a; 
+	std::cout << "Target machine: " << request.ipAdress << std::endl;
 }
 
 /* 
@@ -25,31 +23,92 @@ Transfer::TransferRequest Transfer::getTransferRequest(char** input, size_t leng
 	if(length <= 0)
 		return request;
 
-	//start parsing 
-	std::stringstream stream;
-	std::string inputString(input[0]);
+	//convert the strings into a request
+	for(size_t i = 0; i < length; ++i)
+	{
+		//start parsing 
+		std::string inputString(input[i]);
+
+		Parameter parameter = convertToParameter(inputString);
+
+		std::cout << parameter.type << std::endl;
+
+		switch(parameter.type)
+		{
+			case IPADRESS :
+				std::cout << "found IPADRESS" << std::endl;
+				request.ipAdress = parameter.value;
+		     	break;
+
+			case FILENAME :
+				std::cout << "found FILENAME" << std::endl;
+				request.fileName = parameter.value;
+			break;
+
+			 case NONE : 
+				std::cout << "found CRAP" << std::endl;
+			break;
+		}
+	}
 	
 
 	return request;
 
 }
 
-Transfer::TransferRequest Transfer::getTransferRequest(std::istream* input)
-{
-	return {};
+Transfer::TransferRequest Transfer::getTransferRequest(std::istream* input, std::ostream* output) { 
+	Transfer::TransferRequest request = {};
+
+	//TODO MSK pull this out to somthing that make sense 
+	*output << "Please input the target machine adress" << std::endl;
+
+	std::string adressMessage;
+	*input >> adressMessage;
+
+	//TODO MSK veryfy that the adress is valid
+	request.ipAdress = adressMessage;
+	request.fileName = ""; 
+
+
+	return request;
 }
 
 bool Transfer::isEmpty(Transfer::TransferRequest request)
 {
-	if(!request.ipAdress.empty() ||
-		 !request.file.empty())
+	
+	if(request.ipAdress.empty() ||
+	   request.fileName.empty())
 	{
-			return true;
+		return true;
 	}
 	return false;
 
 }
 
+Transfer::Parameter Transfer::convertToParameter(std::string input)
+{
+	Parameter parameter = {};
+	parameter.type = NONE;
+
+	std::istringstream stream(input);
+
+	std::string type;
 
 
+	//get Type specifyer
+	std::getline(stream, type, '='); 
+	std::transform(type.begin(), type.end(), type.begin(), ::toupper);
 
+
+	//convert string to enum 
+	// TODO MSK check if there is a better way 
+	if(type.compare(IpAdress) == 0)
+		parameter.type = IPADRESS;
+	if(type.compare(FileName) == 0)
+		parameter.type = FILENAME;
+
+	if(parameter.type != NONE) 
+		stream >> parameter.value;
+	
+	return parameter;
+}
