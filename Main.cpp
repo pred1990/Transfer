@@ -1,12 +1,11 @@
 #include "Main"
 int main(int length, char** argv)
 {
-
 	Transfer::TransferRequest request = Transfer::getTransferRequest(argv, (size_t)length);
 
 	if(Transfer::isMissingParameters(request))
 	{
-		request = Transfer::getTransferRequest(request, &std::cin, &std::cout);
+		request = Transfer::completeRequest(request, &std::cin, &std::cout);
 	}
 
 	std::cout << "### Target machine: " << request.ipAdress << std::endl;
@@ -50,13 +49,12 @@ Transfer::TransferRequest Transfer::getTransferRequest(char** input, size_t leng
 		}
 	}
 
-
 	return request;
-
 }
 
-Transfer::TransferRequest Transfer::getTransferRequest(Transfer::TransferRequest request, std::istream* input, std::ostream* output) {
+Transfer::TransferRequest Transfer::completeRequest(Transfer::TransferRequest request, std::istream* input, std::ostream* output) {
 
+    // Ask for Ip Adress
     if(request.ipAdress.empty())
     {
         std::string adress;
@@ -71,7 +69,7 @@ Transfer::TransferRequest Transfer::getTransferRequest(Transfer::TransferRequest
         request.ipAdress = adress;
     }
 
-
+    // Ask for File Name
     if(request.fileName.empty())
     {
         std::string fileName;
@@ -86,7 +84,6 @@ Transfer::TransferRequest Transfer::getTransferRequest(Transfer::TransferRequest
         request.fileName = fileName;
     }
 
-
 	return request;
 }
 
@@ -94,11 +91,13 @@ bool Transfer::isMissingParameters(Transfer::TransferRequest request)
 {
     bool isMissing = false;
 
+    // Is the Ip Adress missing?
 	if(request.ipAdress.empty())
 	{
 		isMissing = true;
 	}
 
+    // Is the File Name missing?
 	if(request.fileName.empty())
 	{
 		isMissing = true;
@@ -135,11 +134,13 @@ Transfer::Parameter Transfer::convertToParameter(std::string input)
 	return parameter;
 }
 
+// TODO BA Check if the Ip Adress is valid. Maybe with REGEX?
 bool Transfer::isValidIpAdress(std::string adress)
 {
     return true;
 }
 
+// TODO BA Check if the filename is a valid path and a valid file
 bool Transfer::isValidFile(std::string fileName)
 {
     return true;

@@ -27,7 +27,7 @@ namespace Transfer
 	};
 
 
-	TransferRequest getTransferRequest(Transfer::TransferRequest request, std::istream* input, std::ostream* output);
+	TransferRequest completeRequest(Transfer::TransferRequest request, std::istream* input, std::ostream* output);
 	TransferRequest getTransferRequest(char** input, size_t length);
 
 	bool isMissingParameters(Transfer::TransferRequest request);
