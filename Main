@@ -32,9 +32,6 @@ namespace Transfer
 
 	bool isMissingParameters(Transfer::TransferRequest request);
 	Parameter convertToParameter(std::string input);
-    bool isValidIpAdress(std::string adress);
-    bool isValidFile(std::string fileName);
-
 }
 
 

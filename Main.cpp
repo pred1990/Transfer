@@ -1,4 +1,6 @@
 #include "Main"
+#include "Validate"
+
 int main(int length, char** argv)
 {
 	Transfer::TransferRequest request = Transfer::getTransferRequest(argv, (size_t)length);
@@ -64,7 +66,7 @@ Transfer::TransferRequest Transfer::completeRequest(Transfer::TransferRequest re
             *output << "Please input a valid adress to the target machine" << std::endl;
             *input >> adress;
 
-        } while(!Transfer::isValidIpAdress(adress));
+        } while(!Validate::ipAdress(adress));
 
         request.ipAdress = adress;
     }
@@ -79,7 +81,7 @@ Transfer::TransferRequest Transfer::completeRequest(Transfer::TransferRequest re
             *output << "Please input a valid file" << std::endl;
             *input >> fileName;
 
-        } while(!Transfer::isValidFile(fileName));
+        } while(!Validate::file(fileName));
 
         request.fileName = fileName;
     }
@@ -132,16 +134,4 @@ Transfer::Parameter Transfer::convertToParameter(std::string input)
 		stream >> parameter.value;
 
 	return parameter;
-}
-
-// TODO BA Check if the Ip Adress is valid. Maybe with REGEX?
-bool Transfer::isValidIpAdress(std::string adress)
-{
-    return true;
-}
-
-// TODO BA Check if the filename is a valid path and a valid file
-bool Transfer::isValidFile(std::string fileName)
-{
-    return true;
 }

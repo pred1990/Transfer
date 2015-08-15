@@ -1,0 +1,9 @@
+#pragma once
+
+#include <string>
+
+namespace Validate
+{
+    bool ipAdress(std::string adress);
+    bool file(std::string fileName);
+}
