@@ -26,12 +26,15 @@ namespace Transfer
 		std::string value;
 	};
 
-	TransferRequest getTransferRequest(std::istream* input, std::ostream* output);
+
+	TransferRequest getTransferRequest(Transfer::TransferRequest request, std::istream* input, std::ostream* output);
 	TransferRequest getTransferRequest(char** input, size_t length);
 
-	bool isEmpty(Transfer::TransferRequest request);
+	bool isMissingParameters(Transfer::TransferRequest request);
 	Parameter convertToParameter(std::string input);
-	
+    bool isValidIpAdress(std::string adress);
+    bool isValidFile(std::string fileName);
+
 }
 
 

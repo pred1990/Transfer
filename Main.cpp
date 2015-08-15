@@ -4,12 +4,13 @@ int main(int length, char** argv)
 
 	Transfer::TransferRequest request = Transfer::getTransferRequest(argv, (size_t)length);
 
-	if(Transfer::isEmpty(request))
+	if(Transfer::isMissingParameters(request))
 	{
-		request = Transfer::getTransferRequest(&std::cin, &std::cout);
+		request = Transfer::getTransferRequest(request, &std::cin, &std::cout);
 	}
 
-	std::cout << "Target machine: " << request.ipAdress << std::endl;
+	std::cout << "### Target machine: " << request.ipAdress << std::endl;
+	std::cout << "### File to transfer " << request.fileName << std::endl;
 }
 
 /*
@@ -54,31 +55,56 @@ Transfer::TransferRequest Transfer::getTransferRequest(char** input, size_t leng
 
 }
 
-Transfer::TransferRequest Transfer::getTransferRequest(std::istream* input, std::ostream* output) {
-	Transfer::TransferRequest request = {};
+Transfer::TransferRequest Transfer::getTransferRequest(Transfer::TransferRequest request, std::istream* input, std::ostream* output) {
 
-	//TODO MSK pull this out to somthing that make sense
-	*output << "Please input the target machine adress" << std::endl;
+    if(request.ipAdress.empty())
+    {
+        std::string adress;
 
-	std::string adressMessage;
-	*input >> adressMessage;
+        do
+        {
+            *output << "Please input a valid adress to the target machine" << std::endl;
+            *input >> adress;
 
-	//TODO MSK verify that the adress is valid
-	request.ipAdress = adressMessage;
-	request.fileName = "";
+        } while(!Transfer::isValidIpAdress(adress));
+
+        request.ipAdress = adress;
+    }
+
+
+    if(request.fileName.empty())
+    {
+        std::string fileName;
+
+        do
+        {
+            *output << "Please input a valid file" << std::endl;
+            *input >> fileName;
+
+        } while(!Transfer::isValidFile(fileName));
+
+        request.fileName = fileName;
+    }
 
 
 	return request;
 }
 
-bool Transfer::isEmpty(Transfer::TransferRequest request)
+bool Transfer::isMissingParameters(Transfer::TransferRequest request)
 {
+    bool isMissing = false;
+
 	if(request.ipAdress.empty())
 	{
-		return true;
+		isMissing = true;
 	}
-	return false;
 
+	if(request.fileName.empty())
+	{
+		isMissing = true;
+	}
+
+	return isMissing;
 }
 
 Transfer::Parameter Transfer::convertToParameter(std::string input)
@@ -107,4 +133,14 @@ Transfer::Parameter Transfer::convertToParameter(std::string input)
 		stream >> parameter.value;
 
 	return parameter;
+}
+
+bool Transfer::isValidIpAdress(std::string adress)
+{
+    return true;
+}
+
+bool Transfer::isValidFile(std::string fileName)
+{
+    return true;
 }
