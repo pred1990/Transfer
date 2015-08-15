@@ -13,18 +13,18 @@ int main(int length, char** argv)
 }
 
 /* 
- *	Reades the parameter of the programm and creates a TransferRequest 
+ *	Reads the parameter of the programm and creates a TransferRequest 
 */
 Transfer::TransferRequest Transfer::getTransferRequest(char** input, size_t length)
 {
 	Transfer::TransferRequest request = {}; 
 
 	//check empty parameter
-	if(length <= 0)
+	if(length <= 1)
 		return request;
 
 	//convert the strings into a request
-	for(size_t i = 0; i < length; ++i)
+	for(size_t i = 1; i < length; ++i)
 	{
 		//start parsing 
 		std::string inputString(input[i]);
@@ -63,7 +63,7 @@ Transfer::TransferRequest Transfer::getTransferRequest(std::istream* input, std:
 	std::string adressMessage;
 	*input >> adressMessage;
 
-	//TODO MSK veryfy that the adress is valid
+	//TODO MSK verify that the adress is valid
 	request.ipAdress = adressMessage;
 	request.fileName = ""; 
 
@@ -73,9 +73,7 @@ Transfer::TransferRequest Transfer::getTransferRequest(std::istream* input, std:
 
 bool Transfer::isEmpty(Transfer::TransferRequest request)
 {
-	
-	if(request.ipAdress.empty() ||
-	   request.fileName.empty())
+	if(request.ipAdress.empty())
 	{
 		return true;
 	}
@@ -93,7 +91,7 @@ Transfer::Parameter Transfer::convertToParameter(std::string input)
 	std::string type;
 
 
-	//get Type specifyer
+	//get Type specifier
 	std::getline(stream, type, '='); 
 	std::transform(type.begin(), type.end(), type.begin(), ::toupper);
 
