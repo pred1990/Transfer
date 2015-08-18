@@ -10,9 +10,10 @@
 namespace Transfer
 {
 	const std::string IpAdress = "-IPADRESS";
-	const std::string FileName= "-FILENAME";
+	const std::string FileName = "-FILENAME";
+	const std::string Listen   = "-LISTEN";
 
-	enum Type {IPADRESS, FILENAME, NONE};
+	enum Type {IPADRESS, FILENAME, LISTEN, NONE};
 
 	struct TransferRequest
 	{

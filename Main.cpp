@@ -45,6 +45,11 @@ Transfer::TransferRequest Transfer::getTransferRequest(char** input, size_t leng
 				request.fileName = parameter.value;
 			break;
 
+			case LISTEN :
+
+				std::cout << "found LISTEN" << std::endl;
+			break;
+
 			 case NONE :
 				std::cout << "found CRAP: " << inputString << std::endl;
 			break;
