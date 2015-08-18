@@ -53,7 +53,7 @@ Transfer::TransferRequest Transfer::getTransferRequest(char** input, size_t leng
 
 			case PORT : 
 				std::cout << "found PORT" << std::endl;
-				request.port = Utill::toInt(parameter.value);
+				request.port = Util::toInt(parameter.value);
 			break;
 
 			 case NONE :
