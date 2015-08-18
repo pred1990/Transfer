@@ -4,6 +4,8 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include "Validate"
+#include "Utill"
 
 
 
@@ -12,13 +14,18 @@ namespace Transfer
 	const std::string IpAdress = "-IPADRESS";
 	const std::string FileName = "-FILENAME";
 	const std::string Listen   = "-LISTEN";
+	const std::string Port     = "-PORT";
 
-	enum Type {IPADRESS, FILENAME, LISTEN, NONE};
+	enum Type {IPADRESS, FILENAME, LISTEN, PORT, NONE};
 
 	struct TransferRequest
 	{
 		std::string ipAdress;
 		std::string fileName;
+
+	//listen for incoming connections
+		bool listen;
+		size_t port;
 	};
 
 	struct Parameter

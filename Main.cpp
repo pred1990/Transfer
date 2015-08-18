@@ -1,5 +1,4 @@
 #include "Main"
-#include "Validate"
 
 int main(int length, char** argv)
 {
@@ -12,6 +11,8 @@ int main(int length, char** argv)
 
 	std::cout << "### Target machine: " << request.ipAdress << std::endl;
 	std::cout << "### File to transfer " << request.fileName << std::endl;
+	std::cout << "### Starting as server: " << request.listen << std::endl;
+	std::cout << "### Port: " << request.port << std::endl;
 }
 
 /*
@@ -46,8 +47,13 @@ Transfer::TransferRequest Transfer::getTransferRequest(char** input, size_t leng
 			break;
 
 			case LISTEN :
-
 				std::cout << "found LISTEN" << std::endl;
+				request.listen = true;
+			break;
+
+			case PORT : 
+				std::cout << "found PORT" << std::endl;
+				request.port = Utill::toInt(parameter.value);
 			break;
 
 			 case NONE :
@@ -96,6 +102,7 @@ Transfer::TransferRequest Transfer::completeRequest(Transfer::TransferRequest re
 
 bool Transfer::isMissingParameters(Transfer::TransferRequest request)
 {
+	//NOTE MSK should we consider -listen or -port?
     bool isMissing = false;
 
     // Is the Ip Adress missing?
@@ -109,6 +116,10 @@ bool Transfer::isMissingParameters(Transfer::TransferRequest request)
 	{
 		isMissing = true;
 	}
+
+    // if the programm is requested to listen as Server no other option applies
+	if(request.listen == true)
+		isMissing = false;
 
 	return isMissing;
 }
@@ -134,9 +145,14 @@ Transfer::Parameter Transfer::convertToParameter(std::string input)
 		parameter.type = IPADRESS;
 	if(type.compare(FileName) == 0)
 		parameter.type = FILENAME;
+	if(type.compare(Listen) == 0)
+		parameter.type = LISTEN;
+	if(type.compare(Port) == 0)
+		parameter.type = PORT;
 
 	if(parameter.type != NONE)
 		stream >> parameter.value;
+	std::cout << parameter.value;
 
 	return parameter;
 }
