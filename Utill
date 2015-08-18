@@ -1,7 +1,0 @@
-#pragma once
-#include<string>
-#include<stdlib.h>
-
-namespace Utill{
-	size_t toInt(const std::string string);
-}
