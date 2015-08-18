@@ -16,7 +16,7 @@ namespace Transfer
 	const std::string Listen   = "-LISTEN";
 	const std::string Port     = "-PORT";
 
-	enum Type {IPADRESS, FILENAME, LISTEN, PORT, NONE};
+	enum Type {IPADRESS, FILENAME, Server, PORT, NONE};
 
 	struct TransferRequest
 	{
@@ -24,7 +24,7 @@ namespace Transfer
 		std::string fileName;
 
 	//listen for incoming connections
-		bool listen;
+		bool isServer;
 		size_t port;
 	};
 
