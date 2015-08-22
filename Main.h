@@ -4,8 +4,9 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
-#include "Validate"
-#include "Util"
+#include "Validate.h"
+#include "Util.h"
+#include "Network.h"
 
 
 
