@@ -13,6 +13,7 @@ int main(int length, char** argv)
 	std::cout << "### File to transfer " << request.fileName << std::endl;
 	std::cout << "### Starting as server: " << request.isServer << std::endl;
 	std::cout << "### Port: " << request.port << std::endl;
+        std::cout << "Basti was here... lol...xD...hacked.." << std::endl;
 }
 
 /*
