@@ -1,13 +1,15 @@
 #pragma once
 
+typedef long long int a;
+
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include "Types.h"
 #include "Validate.h"
 #include "Util.h"
 #include "Network.h"
-
 
 
 namespace Transfer
