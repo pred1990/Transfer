@@ -15,7 +15,7 @@ namespace Internal
 		}
 		else 
 		{
-			std::cout << "initializing Network fails
+			std::cout << "initializing Network fails" << std::endl;
 		}
 
 	}
