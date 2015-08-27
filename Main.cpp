@@ -1,6 +1,6 @@
 #include "Main.h"
 
-//trying to figure out how git works
+//trying to figure out how git works, this here too;
 int main(int length, char** argv)
 {
 	Transfer::TransferRequest request = Transfer::getTransferRequest(argv, (size_t)length);
