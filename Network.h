@@ -1,14 +1,21 @@
 #pragma once
 
+
+//TODO MSK needs to be removed
+#include <iostream> 
+
 #include "Types.h"
 
 
 
 // seperate windows includes from linux
 // TODO MSK check if this works
-#if defined(win32) || defined(win64)
-	
-	//TODO MSK change this into linux elif defined(linux_whatever)
+#if defined(__WIN32__) || defined(__WIN64__)
+	#include <winsock2.h>
+	#include <windef.h>
+	#include <windef.h>
+	#include <Ws2tcpip.h>
+	#include <stdio.h>
 #elif defined(__linux__)
 	#include <sys/types.h>
 	#include <sys/socket.h>
