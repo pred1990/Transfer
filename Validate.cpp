@@ -1,13 +1,11 @@
 #include "Validate.h"
 
-
-// TODO BA Check if the Ip Adress is valid. Maybe with REGEX?
+// TODO SW - implement to another place
 bool Validate::ipAdress(std::string adress)
 {
     return true;
 }
 
-// TODO BA Check if the filename is a valid path and a valid file
 bool Validate::file(std::string fileName)
 {
     struct stat s;
@@ -16,7 +14,7 @@ bool Validate::file(std::string fileName)
     status = stat(fileName.c_str(), &s);
 
     if(status != 0) {
-        printf ("Error with stat(), errno = %d\n", errno);
+        printf ("Error %s is not a File or either a File", fileName.c_str());
         return false;
     }
 

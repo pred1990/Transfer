@@ -1,12 +1,13 @@
 #pragma once
 
 #include <string>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include <errno.h>
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+#include <sys/types.h>
+#include <sys/stat.h>
+
 
 
 namespace Validate
