@@ -4,6 +4,9 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <stdio.h>
+#include <iostream>
+#include <fstream>
+
 
 namespace Validate
 {

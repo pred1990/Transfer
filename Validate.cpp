@@ -10,8 +10,13 @@ bool Validate::ipAdress(std::string adress)
 // TODO BA Check if the filename is a valid path and a valid file
 bool Validate::file(std::string fileName)
 {
-    // Test file/folder with access function
-    return (access(fileName.c_str()) != -1);
+    std::ifstream ifile(fileName);
+    if(ifile)
+    {
+        return true;
+    }
+
+    return false;
 //    struct stat s;
 //    int status;
 
